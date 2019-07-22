@@ -446,7 +446,7 @@ def test(data, model, testData):
         for sent, gold, clas, rank in zip(sents, goldens, classificatons, rankings):
             test_jsonlines.append({
                 'sentence': ' '.join(sent),
-                'golden': gold,
+                'golden': gold[0],
                 'classifier': clas,
                 'ranker': rank
             })
