@@ -316,7 +316,7 @@ class Classifier(nn.Module):
         classified_spans = [flat_spanPairs[_idx] for _idx in globalIDs]
         classified_sent_ids = [flat_sentIds[_idx] for _idx in globalIDs]
         for sent_id, _span in zip(classified_sent_ids, classified_spans):
-            cpredict_spans[sent_id].append([int(_span[0]), int(_span[1])])
+            cpredict_spans[sent_id].append([int(_span[0]), int(_span[1])-1])
 
         return loss, cTP, cTPFP, cTPFN, classified_emb, classified_spans, classified_sent_ids, goldenIDs, negative_IDs, cpredict_spans
 
@@ -382,7 +382,7 @@ class niceRanking(nn.Module):
                     ranking_spans = [classified_spans[_idx] for _idx in filter_index]
                     ranking_sent_ids = [classified_sent_ids[_idx] for _idx in filter_index]
                     for _rspan, _sent_id in zip(ranking_spans, ranking_sent_ids):
-                        rpredict_spans[_sent_id].append([int(_rspan[0]), int(_rspan[1])])
+                        rpredict_spans[_sent_id].append([int(_rspan[0]), int(_rspan[1])-1])
 
                 return loss, rTP, rTPFP, rTPFN, cTP, cTPFP, cTPFN, cpredict_spans, rpredict_spans
 
